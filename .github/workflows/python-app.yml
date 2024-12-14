@@ -34,10 +34,12 @@ jobs:
         pytest test_conways_game_of_life.py -v
 
     - name: Upload test results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-results
         path: |
           .pytest_cache/
-          test-reports/ 
+          test-reports/
+          compression-level: 6
+          retention-days: 5
