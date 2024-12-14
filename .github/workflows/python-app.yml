@@ -27,19 +27,24 @@ jobs:
     - name: Install system dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y python-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsdl1.2-dev libsmpeg-dev python-numpy subversion libportmidi-dev ffmpeg libswscale-dev libavformat-dev libavcodec-dev
+        sudo apt-get install -y \
+          python3-dev \
+          libsdl2-dev \
+          libsdl2-image-dev \
+          libsdl2-mixer-dev \
+          libsdl2-ttf-dev \
+          libportmidi-dev \
+          ffmpeg \
+          libavcodec-dev \
+          libavformat-dev \
+          libswscale-dev
     
     - name: Test with pytest
       run: |
         pytest test_conways_game_of_life.py -v
 
     - name: Upload test results
-      uses: actions/upload-artifact@v4
-      if: always()
+      uses: actions/upload-artifact@v2
       with:
         name: test-results
-        path: |
-          .pytest_cache/
-          test-reports/
-          compression-level: 6
-          retention-days: 5
+        path: .pytest_cache
